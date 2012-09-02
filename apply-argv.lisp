@@ -66,7 +66,8 @@
 (defun collect-list-arg (indicator parsed-argv)
   (loop :for (a b) :on parsed-argv :by #'cddr
      :when (eq a indicator)
-     :collect b))
+     :collect (when (not (argumentp b))
+                b)))
 
 (defun keywordify (string)
   (intern (string-upcase string) :keyword))
