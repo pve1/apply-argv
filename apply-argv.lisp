@@ -91,7 +91,8 @@
            (let ((next-is-argument (when-let (s (second argv))
                                      (argumentp s))))
              (append (list (keywordify (get-argument arg))
-                           (if next-is-argument
+                           (if (or next-is-argument
+                                   (null (second argv))) ;; end of args
                                t
                                (second argv)))
                      (if next-is-argument

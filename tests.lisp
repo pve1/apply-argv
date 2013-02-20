@@ -34,6 +34,9 @@
   (is (equal '(("--aaa") :FOO "bar")
              (parse-argv '("--foo=bar" "--" "--aaa"))))
 
+  (is (equal '(:FOO "bar" :AAA t)
+             (parse-argv '("--foo=bar" "--aaa"))))
+
   (is (equal '(("ASDASD") :FOO "bar" :AAA T :QWE T :BAR "asda")
              (parse-argv '("--foo=bar"
                            "-aaa"
