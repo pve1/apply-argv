@@ -119,3 +119,17 @@
 
 (defun apply-argv (function &rest argv)
   (apply function (parse-argv argv)))
+
+(defun get-argv ()
+  ;; Borrowed from command-line-arguments.  Temporary solution.
+  ;; This is not PvE's code.
+  #+sbcl (cdr sb-ext:*posix-argv*)
+  #+clozure (cdr (ccl::command-line-arguments))
+  #+gcl (cdr si:*command-args*)
+  #+ecl (loop for i from 1 below (si:argc) collect (si:argv i))
+  #+cmu (cdr extensions:*command-line-strings*)
+  #+allegro (cdr (sys:command-line-arguments))
+  #+lispworks (cdr sys:*line-arguments-list*)
+  #+clisp ext:*args*
+  #-(or sbcl clozure gcl ecl cmu allegro lispworks clisp)
+  (error "get-argv not supported for your implementation"))

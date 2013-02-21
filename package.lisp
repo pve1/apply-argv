@@ -4,4 +4,5 @@
   (:use :cl :alexandria)
   (:export #:apply-argv
            #:parse-argv
-           #:parse-argv*))
+           #:parse-argv*
+           #:get-argv))
