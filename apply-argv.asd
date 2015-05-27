@@ -11,6 +11,10 @@
                (:file "apply-argv")))
 
 (asdf:defsystem #:apply-argv-tests
+  :version "0.1"
+  :author "Peter von Etter"
+  :description "Test system of apply-argv."
+  :license "LLGPL"
   :serial t
   :depends-on (:fiveam
                :apply-argv)
