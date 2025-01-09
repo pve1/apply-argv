@@ -8,9 +8,10 @@
   :serial t
   :depends-on (:alexandria)
   :components ((:file "package")
-               (:file "apply-argv")))
+               (:file "apply-argv"))
+  :in-order-to ((test-op (test-op #:apply-argv/tests))))
 
-(asdf:defsystem #:apply-argv-tests
+(asdf:defsystem #:apply-argv/tests
   :version "0.1"
   :author "Peter von Etter"
   :description "Test system of apply-argv."
@@ -18,9 +19,6 @@
   :serial t
   :depends-on (:fiveam
                :apply-argv)
-  :components ((:file "tests")))
-
-(defmethod asdf:perform ((op test-op)
-                         (c (eql (find-system :apply-argv))))
-  (require :apply-argv-tests)
-  (funcall (read-from-string "5AM:RUN!") :apply-argv))
+  :components ((:file "tests"))
+  :perform (test-op (op system)
+             (uiop:symbol-call :5am :run! :apply-argv)))
